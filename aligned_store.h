@@ -1,5 +1,5 @@
-#ifndef ALIGNED_STORE_H
-#define ALIGNED_STORE_H
+#ifndef PCX_ALIGNED_STORE_H
+#define PCX_ALIGNED_STORE_H
 
 #include <type_traits>
 #include <utility>
@@ -23,4 +23,4 @@ private:
 
 }
 
-#endif // ALIGNED_STORE_H
+#endif // PCX_ALIGNED_STORE_H

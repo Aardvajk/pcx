@@ -1,5 +1,5 @@
-#ifndef PCXFLAGS_H
-#define PCXFLAGS_H
+#ifndef PCX_FLAGS_H
+#define PCX_FLAGS_H
 
 #include <type_traits>
 #include <initializer_list>
@@ -54,4 +54,4 @@ template<typename T> pcx::flags<pcx_detail_flag_type<T> > operator|(pcx::flags<T
 template<typename T> pcx::flags<pcx_detail_flag_type<T> > operator&(pcx::flags<T> a, T b){ return static_cast<T>(a) & b; }
 template<typename T> pcx::flags<pcx_detail_flag_type<T> > operator^(pcx::flags<T> a, T b){ return static_cast<T>(a) ^ b; }
 
-#endif // PCXFLAGS_H
+#endif // PCX_FLAGS_H
