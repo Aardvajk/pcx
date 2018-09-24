@@ -7,8 +7,9 @@ CONFIG -= qt
 QMAKE_CXXFLAGS += -std=gnu++11
 QMAKE_LFLAGS += -Wl,--exclude-all-symbols
 
+INCLUDEPATH += "C:/Projects/pcx"
+
 SOURCES += \
-    pcx.cpp \
     optional.cpp
 
 HEADERS += \
@@ -20,4 +21,6 @@ HEADERS += \
     lexical_cast.h \
     optional.h \
     ptr_vector.h \
-    range_reverse.h
+    range_reverse.h \
+    join_str.h \
+    scoped_ptr.h
