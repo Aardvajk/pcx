@@ -23,4 +23,5 @@ HEADERS += \
     ptr_vector.h \
     range_reverse.h \
     join_str.h \
-    scoped_ptr.h
+    scoped_ptr.h \
+    signals.h
