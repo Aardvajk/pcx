@@ -10,7 +10,8 @@ QMAKE_LFLAGS += -Wl,--exclude-all-symbols
 INCLUDEPATH += "C:/Projects/pcx"
 
 SOURCES += \
-    optional.cpp
+    optional.cpp \
+    process.cpp
 
 HEADERS += \
     flags.h \
@@ -24,4 +25,5 @@ HEADERS += \
     range_reverse.h \
     join_str.h \
     scoped_ptr.h \
-    signals.h
+    signals.h \
+    process.h
