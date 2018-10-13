@@ -4,6 +4,8 @@ CONFIG += staticlib
 CONFIG -= app_bundle
 CONFIG -= qt
 
+DEFINES -= UNICODE
+
 QMAKE_CXXFLAGS += -std=gnu++11
 QMAKE_LFLAGS += -Wl,--exclude-all-symbols
 
