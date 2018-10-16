@@ -8,8 +8,6 @@
 namespace pcx_detail
 {
 
-// hmm
-
 struct lexical_functor
 {
     template<typename T> std::string operator()(const T &t) const { return pcx::lexical_cast<std::string>(t); }
