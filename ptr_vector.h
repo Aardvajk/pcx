@@ -32,6 +32,8 @@ public:
         T *operator->() const { return *i; }
 
     private:
+        friend class ptr_vector;
+
         typename std::vector<T*, A>::iterator i;
     };
 
@@ -56,6 +58,8 @@ public:
         const T *operator->() const { return *i; }
 
     private:
+        friend class ptr_vector;
+
         typename std::vector<T*, A>::const_iterator i;
     };
 
@@ -80,6 +84,8 @@ public:
         T *operator->() const { return *i; }
 
     private:
+        friend class ptr_vector;
+
         typename std::vector<T*, A>::reverse_iterator i;
     };
 
@@ -104,6 +110,8 @@ public:
         const T *operator->() const { return *i; }
 
     private:
+        friend class ptr_vector;
+
         typename std::vector<T*, A>::const_reverse_iterator i;
     };
 
