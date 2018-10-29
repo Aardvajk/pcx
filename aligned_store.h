@@ -16,7 +16,7 @@ public:
     aligned_store() : df(nullptr) {} 
     ~aligned_store(){ if(df) df(&t); }
 
-    template<typename T, typename... Args> void alloc(Args&&... args){ static_assert(N >= sizeof(T), ""); new(&t) T(std::forward<Args>(args)...); df = [](void *p){ reinterpret_cast<T*>(p)->~T(); }; }
+    template<typename T, typename... Args> T &alloc(Args&&... args){ static_assert(N >= sizeof(T), ""); new(&t) T(std::forward<Args>(args)...); df = [](void *p){ reinterpret_cast<T*>(p)->~T(); }; return get<T>(); }
 
     template<typename T> T &get(){ return *(reinterpret_cast<T*>(&t)); }
     template<typename T> const T &get() const { return *(reinterpret_cast<const T*>(&t)); }

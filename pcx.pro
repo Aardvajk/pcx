@@ -28,4 +28,5 @@ HEADERS += \
     join_str.h \
     scoped_ptr.h \
     signals.h \
-    process.h
+    process.h \
+    scoped_lock.h
