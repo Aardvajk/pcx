@@ -1,5 +1,5 @@
-#ifndef SCOPED_LOCK_H
-#define SCOPED_LOCK_H
+#ifndef PCX_SCOPED_LOCK_H
+#define PCX_SCOPED_LOCK_H
 
 #include <pcx/non_copyable.h>
 
@@ -32,4 +32,4 @@ template<typename T> scoped_lock_guard<T> scoped_lock(T &v)
 
 }
 
-#endif // SCOPED_LOCK_H
+#endif // PCX_SCOPED_LOCK_H

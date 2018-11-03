@@ -1,5 +1,5 @@
-#ifndef PROCESS_H
-#define PROCESS_H
+#ifndef PCX_PROCESS_H
+#define PCX_PROCESS_H
 
 #include <string>
 
@@ -15,4 +15,4 @@ int execute(const std::string &command);
 
 }
 
-#endif // PROCESS_H
+#endif // PCX_PROCESS_H

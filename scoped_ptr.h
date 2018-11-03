@@ -1,5 +1,5 @@
-#ifndef SCOPED_PTR_H
-#define SCOPED_PTR_H
+#ifndef PCX_SCOPED_PTR_H
+#define PCX_SCOPED_PTR_H
 
 namespace pcx
 {
