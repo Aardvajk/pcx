@@ -7,7 +7,7 @@
 namespace pcx_detail
 {
 
-inline void str_detail(std::ostream &os)
+inline void str_detail(std::ostream&)
 {
 }
 

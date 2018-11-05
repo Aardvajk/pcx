@@ -29,4 +29,5 @@ HEADERS += \
     scoped_ptr.h \
     signals.h \
     process.h \
-    scoped_lock.h
+    scoped_lock.h \
+    ordered_map.h
