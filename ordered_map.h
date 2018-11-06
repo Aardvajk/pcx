@@ -24,6 +24,7 @@ public:
     const std::pair<K, V> &operator[](size_type index) const { return v[index]; }
 
     void clear(){ m.clear(); v.clear(); }
+    iterator erase(iterator i);
 
     iterator find(const K &key){ return find_t<iterator, ordered_map>(*this, key); }
     const_iterator find(const K &key) const { return find_t<const_iterator, ordered_map>(*this, key); }
@@ -75,6 +76,21 @@ template<typename K, typename V, typename Hash> V &ordered_map<K, V, Hash>::oper
 
     v.push_back(std::make_pair(key, V()));
     return v.back().second;
+}
+
+template<typename K, typename V, typename Hash> typename ordered_map<K, V, Hash>::iterator ordered_map<K, V, Hash>::erase(iterator i)
+{
+    auto index = size_type(i - v.begin());
+
+    auto j = m.find(Hash()(i->first));
+    j->second.erase(std::lower_bound(j->second.begin(), j->second.end(), index));
+
+    for(auto &bin: m)
+    {
+        for(auto &i: bin.second) if(i > index) --i;
+    }
+
+    return v.erase(i);
 }
 
 template<typename K, typename V, typename Hash> template<typename I, typename M> I ordered_map<K, V, Hash>::find_t(M &m, const K &key)
