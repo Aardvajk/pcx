@@ -1,12 +1,14 @@
 #ifndef PCX_PTR_VECTOR_H
 #define PCX_PTR_VECTOR_H
 
+#include <pcx/non_copyable.h>
+
 #include <vector>
 
 namespace pcx
 {
 
-template<typename T, typename A = std::allocator<T*> > class ptr_vector
+template<typename T, typename A = std::allocator<T*> > class ptr_vector : public non_copyable
 {
 public:
     using size_type = typename std::vector<T*, A>::size_type;
@@ -170,9 +172,6 @@ public:
     const std::vector<T*, A> &raw() const { return v; }
 
 private:
-    ptr_vector(const ptr_vector&) = delete;
-    void operator=(const ptr_vector&) = delete;
-
     std::vector<T*, A> v;
 };
 

@@ -27,7 +27,7 @@ public:
     iterator erase(iterator i);
 
     iterator find(const K &key){ return find_t<iterator, ordered_map>(*this, key); }
-    const_iterator find(const K &key) const { return find_t<const_iterator, ordered_map>(*this, key); }
+    const_iterator find(const K &key) const { return find_t<const_iterator, const ordered_map>(*this, key); }
 
     iterator begin(){ return v.begin(); }
     iterator end(){ return v.end(); }
