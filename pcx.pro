@@ -30,4 +30,5 @@ HEADERS += \
     signals.h \
     process.h \
     scoped_lock.h \
-    ordered_map.h
+    ordered_map.h \
+    shared_data.h
