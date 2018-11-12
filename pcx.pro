@@ -31,4 +31,5 @@ HEADERS += \
     process.h \
     scoped_lock.h \
     ordered_map.h \
-    shared_data.h
+    shared_data.h \
+    resource_map.h

@@ -20,9 +20,6 @@ public:
 
     V &operator[](const K &key);
 
-    std::pair<K, V> &operator[](size_type index){ return v[index]; }
-    const std::pair<K, V> &operator[](size_type index) const { return v[index]; }
-
     void clear(){ m.clear(); v.clear(); }
     iterator erase(iterator i);
 
@@ -39,6 +36,8 @@ public:
 
 private:
     template<typename I, typename M> static I find_t(M &m, const K &key);
+
+    static const V null_value;
 
     class proxy
     {
