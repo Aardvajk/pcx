@@ -33,6 +33,7 @@ public:
     const_iterator end() const { return v.end(); }
 
     size_type size() const { return v.size(); }
+    bool empty() const { return !v.size(); }
 
 private:
     template<typename I, typename M> static I find_t(M &m, const K &key);
