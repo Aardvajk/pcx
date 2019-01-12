@@ -30,6 +30,23 @@ template<typename T> scoped_lock_guard<T> scoped_lock(T &v)
     return scoped_lock_guard<T>(v);
 }
 
+class lock
+{
+public:
+    lock(bool value = false) : v(value) { }
+
+    operator bool() const { return v; }
+
+private:
+    bool v;
+};
+
+template<> struct scoped_lock_value<lock>
+{
+    static const lock locked;
+    static const lock unlocked;
+};
+
 }
 
 #endif // PCX_SCOPED_LOCK_H
