@@ -33,4 +33,5 @@ HEADERS += \
     scoped_lock.h \
     ordered_map.h \
     shared_data.h \
-    resource_map.h
+    resource_map.h \
+    enum_range.h
