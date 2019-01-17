@@ -28,7 +28,7 @@ public:
     enum_range_wrapper(T start, T finish) : start(start), finish(finish) { }
 
     enum_range_iterator<T> begin(){ return enum_range_iterator<T>(start); }
-    enum_range_iterator<T> end(){ return enum_range_iterator<T>(static_cast<T>(static_cast<unsigned>(finish) + 1)); }
+    enum_range_iterator<T> end(){ return enum_range_iterator<T>(static_cast<T>(static_cast<unsigned>(finish))); }
 
 private:
     T start;
