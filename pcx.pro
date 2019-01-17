@@ -34,4 +34,5 @@ HEADERS += \
     ordered_map.h \
     shared_data.h \
     resource_map.h \
-    enum_range.h
+    enum_range.h \
+    indexed_range.h
