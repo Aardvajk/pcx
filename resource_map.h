@@ -12,9 +12,17 @@ namespace pcx
 {
 
 template<typename Base> class resource_map;
+template<typename Base, typename T> class resource_handle;
 
 namespace detail
 {
+
+template<typename Base> class base_resource_ptr
+{
+protected:
+    Base &access(resource_map<Base> &map, std::size_t id){ return map.v[id]; }
+    const Base &access(const resource_map<Base> &map, std::size_t id) const { return map.v[id]; }
+};
 
 template<typename Base> class base_resource_handle : public non_copyable
 {
@@ -24,6 +32,31 @@ protected:
 };
 
 }
+
+template<typename Base, typename T> class resource_ptr : public detail::base_resource_ptr<Base>
+{
+public:
+    resource_ptr() = default;
+
+    T &operator*(){ return static_cast<T&>(detail::base_resource_ptr<Base>::access(*map, *id)); }
+    const T &operator*() const { return static_cast<const T&>(detail::base_resource_ptr<Base>::access(*map, *id)); }
+
+    T *get(){ return &(*(*this)); }
+    const T *get() const { return &(*(*this)); }
+
+    T *operator->(){ return &(*(*this)); }
+    const T *operator->() const { return &(*(*this)); }
+
+    bool valid() const { return id; }
+
+private:
+    friend class resource_handle<Base, T>;
+
+    resource_ptr(resource_map<Base> *map, std::size_t id) : map(map), id(id) { }
+
+    resource_map<Base> *map;
+    pcx::optional<std::size_t> id;
+};
 
 template<typename Base, typename T> class resource_handle : public detail::base_resource_handle<Base>
 {
@@ -36,6 +69,8 @@ public:
 
     T &operator*(){ return static_cast<T&>(detail::base_resource_handle<Base>::access(*map, *id)); }
     const T &operator*() const { return static_cast<const T&>(detail::base_resource_handle<Base>::access(*map, *id)); }
+
+    resource_ptr<Base, T> ptr(){ return resource_ptr<Base, T>(map, id); }
 
     T *get(){ return &(*(*this)); }
     const T *get() const { return &(*(*this)); }
@@ -84,6 +119,7 @@ public:
 
 private:
     friend class detail::base_resource_handle<Base>;
+    friend class detail::base_resource_ptr<Base>;
 
     ptr_view_vector<Base> v;
     std::vector<std::size_t> fr;
