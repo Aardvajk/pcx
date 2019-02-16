@@ -35,4 +35,5 @@ HEADERS += \
     shared_data.h \
     resource_map.h \
     enum_range.h \
-    indexed_range.h
+    indexed_range.h \
+    datastream.h
