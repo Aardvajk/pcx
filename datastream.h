@@ -13,15 +13,17 @@ class data_istream
 public:
     explicit data_istream(std::istream *s) : s(s) { }
 
-    data_istream &operator>>(char v){ return pod(v); }
-    data_istream &operator>>(unsigned char v){ return pod(v); }
-    data_istream &operator>>(short v){ return pod(v); }
-    data_istream &operator>>(unsigned short v){ return pod(v); }
-    data_istream &operator>>(int v){ return pod(v); }
-    data_istream &operator>>(unsigned int v){ return pod(v); }
-    data_istream &operator>>(long v){ return pod(v); }
-    data_istream &operator>>(unsigned long v){ return pod(v); }
-    data_istream &operator>>(float v){ return pod(v); }
+    data_istream &operator>>(char &v){ return pod(v); }
+    data_istream &operator>>(unsigned char &v){ return pod(v); }
+    data_istream &operator>>(short &v){ return pod(v); }
+    data_istream &operator>>(unsigned short &v){ return pod(v); }
+    data_istream &operator>>(int &v){ return pod(v); }
+    data_istream &operator>>(unsigned int &v){ return pod(v); }
+    data_istream &operator>>(long &v){ return pod(v); }
+    data_istream &operator>>(unsigned long &v){ return pod(v); }
+    data_istream &operator>>(long long &v){ return pod(v); }
+    data_istream &operator>>(unsigned long long &v){ return pod(v); }
+    data_istream &operator>>(float &v){ return pod(v); }
     data_istream &operator>>(double v){ return pod(v); }
 
     void read(char *ch, std::size_t bytes){ s->read(ch, bytes); }
@@ -58,6 +60,8 @@ public:
     data_ostream &operator<<(unsigned int v){ return pod(v); }
     data_ostream &operator<<(long v){ return pod(v); }
     data_ostream &operator<<(unsigned long v){ return pod(v); }
+    data_ostream &operator<<(long long v){ return pod(v); }
+    data_ostream &operator<<(unsigned long long v){ return pod(v); }
     data_ostream &operator<<(float v){ return pod(v); }
     data_ostream &operator<<(double v){ return pod(v); }
 
@@ -81,5 +85,8 @@ private:
 };
 
 }
+
+pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s);
+pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::string &s);
 
 #endif // DATASTREAM_H
