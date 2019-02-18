@@ -14,8 +14,7 @@ INCLUDEPATH += "C:/Projects/pcx"
 SOURCES += \
     optional.cpp \
     process.cpp \
-    scoped_lock.cpp \
-    datastream.cpp
+    scoped_lock.cpp
 
 HEADERS += \
     flags.h \

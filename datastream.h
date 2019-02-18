@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include <string>
 
 namespace pcx
@@ -86,7 +87,41 @@ private:
 
 }
 
-pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s);
-pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::string &s);
+template<typename T> pcx::data_istream &operator>>(pcx::data_istream &ds, std::vector<T> &v)
+{
+    auto n = ds.get<std::size_t>();
+    v.resize(n);
+
+    ds.read(reinterpret_cast<char*>(v.data()), n * sizeof(T));
+
+    return ds;
+}
+
+template<typename T> pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::vector<T> &v)
+{
+    ds << static_cast<std::size_t>(v.size());
+    ds.write(reinterpret_cast<const char*>(v.data()), v.size() * sizeof(T));
+
+    return ds;
+}
+
+inline pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s)
+{
+    std::vector<char> v;
+
+    ds >> v;
+    v.push_back('\0');
+    s = v.data();
+
+    return ds;
+}
+
+inline pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::string &s)
+{
+    ds << static_cast<std::size_t>(s.length());
+    ds.write(s.data(), s.length());
+
+    return ds;
+}
 
 #endif // DATASTREAM_H
