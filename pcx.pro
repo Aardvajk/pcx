@@ -36,4 +36,5 @@ HEADERS += \
     resource_map.h \
     enum_range.h \
     indexed_range.h \
-    datastream.h
+    datastream.h \
+    fixed_array.h
