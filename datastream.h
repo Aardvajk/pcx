@@ -112,10 +112,20 @@ private:
 
 template<typename T> pcx::data_istream &operator>>(pcx::data_istream &ds, std::vector<T> &v)
 {
+    v.clear();
+
+    auto n = ds.get<std::size_t>();
+    for(std::size_t i = 0; i < n; ++i) v.push_back(ds.get<T>());
+
+    return ds;
+}
+
+template<> inline pcx::data_istream &operator>>(pcx::data_istream &ds, std::vector<char> &v)
+{
     auto n = ds.get<std::size_t>();
     v.resize(n);
 
-    ds.read(reinterpret_cast<char*>(v.data()), n * sizeof(T));
+    ds.read(reinterpret_cast<char*>(v.data()), n);
 
     return ds;
 }
@@ -123,7 +133,15 @@ template<typename T> pcx::data_istream &operator>>(pcx::data_istream &ds, std::v
 template<typename T> pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::vector<T> &v)
 {
     ds << static_cast<std::size_t>(v.size());
-    ds.write(reinterpret_cast<const char*>(v.data()), v.size() * sizeof(T));
+    for(auto i: v) ds << i;
+
+    return ds;
+}
+
+template<> inline pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::vector<char> &v)
+{
+    ds << static_cast<std::size_t>(v.size());
+    ds.write(reinterpret_cast<const char*>(v.data()), v.size());
 
     return ds;
 }
