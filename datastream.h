@@ -1,8 +1,11 @@
 #ifndef DATASTREAM_H
 #define DATASTREAM_H
 
+#include <pcx/buffer.h>
+
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <string>
 
@@ -48,6 +51,15 @@ private:
     std::ifstream i;
 };
 
+class data_isstream : public data_istream
+{
+public:
+    data_isstream(const buffer &data) : data_istream(&i), i(std::string(data.begin(), data.end()), std::ios::binary) { }
+
+private:
+    std::istringstream i;
+};
+
 class data_ostream
 {
 public:
@@ -85,6 +97,17 @@ private:
     std::ofstream o;
 };
 
+class data_osstream : public data_ostream
+{
+public:
+    data_osstream() : data_ostream(&o) { }
+
+    buffer data() const { auto s = o.str(); return buffer(s.begin(), s.end()); }
+
+private:
+    std::ostringstream o;
+};
+
 }
 
 template<typename T> pcx::data_istream &operator>>(pcx::data_istream &ds, std::vector<T> &v)
@@ -105,23 +128,9 @@ template<typename T> pcx::data_ostream &operator<<(pcx::data_ostream &ds, const 
     return ds;
 }
 
-inline pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s)
-{
-    std::vector<char> v;
+pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s);
+pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::string &s);
 
-    ds >> v;
-    v.push_back('\0');
-    s = v.data();
-
-    return ds;
-}
-
-inline pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::string &s)
-{
-    ds << static_cast<std::size_t>(s.length());
-    ds.write(s.data(), s.length());
-
-    return ds;
-}
+pcx::data_ostream &operator<<(pcx::data_ostream &ds, const char *s);
 
 #endif // DATASTREAM_H

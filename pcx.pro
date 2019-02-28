@@ -14,7 +14,8 @@ INCLUDEPATH += "C:/Projects/pcx"
 SOURCES += \
     optional.cpp \
     process.cpp \
-    scoped_lock.cpp
+    scoped_lock.cpp \
+    datastream.cpp
 
 HEADERS += \
     flags.h \
@@ -37,4 +38,5 @@ HEADERS += \
     enum_range.h \
     indexed_range.h \
     datastream.h \
-    fixed_array.h
+    fixed_array.h \
+    buffer.h
