@@ -15,7 +15,8 @@ SOURCES += \
     optional.cpp \
     process.cpp \
     scoped_lock.cpp \
-    datastream.cpp
+    datastream.cpp \
+    split_str.cpp
 
 HEADERS += \
     flags.h \
@@ -39,4 +40,5 @@ HEADERS += \
     indexed_range.h \
     datastream.h \
     fixed_array.h \
-    buffer.h
+    buffer.h \
+    split_str.h
