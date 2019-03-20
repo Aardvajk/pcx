@@ -52,6 +52,12 @@ private:
     typename std::aligned_storage<sizeof(T)>::type s;
 };
 
+template<typename T> bool operator==(const optional<T> &o, const T &v){ return o && *o == v; }
+template<typename T> bool operator==(const T &v, const optional<T> &o){ return o && *o == v; }
+
+template<typename T> bool operator!=(const optional<T> &o, const T &v){ return !o || *o != v; }
+template<typename T> bool operator!=(const T &v, const optional<T> &o){ return !o || *o != v; }
+
 }
 
 #endif // PCX_OPTIONAL_H
