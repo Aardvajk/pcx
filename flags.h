@@ -4,6 +4,7 @@
 #include <type_traits>
 #include <initializer_list>
 #include <cstdint>
+#include <functional>
 
 namespace pcx
 {
@@ -19,6 +20,8 @@ public:
 
     operator bool() const { return v; }
     operator T() const { return static_cast<T>(v); }
+
+    explicit operator type() const { return v; }
 
     flags operator~() const { return static_cast<T>(~v); }
 
@@ -53,5 +56,19 @@ template<typename T> pcx::flags<pcx_detail_flag_type<T> > operator^(T a, pcx::fl
 template<typename T> pcx::flags<pcx_detail_flag_type<T> > operator|(pcx::flags<T> a, T b){ return static_cast<T>(a) | b; }
 template<typename T> pcx::flags<pcx_detail_flag_type<T> > operator&(pcx::flags<T> a, T b){ return static_cast<T>(a) & b; }
 template<typename T> pcx::flags<pcx_detail_flag_type<T> > operator^(pcx::flags<T> a, T b){ return static_cast<T>(a) ^ b; }
+
+template<typename T> bool operator==(pcx::flags<T> a, pcx::flags<T> b){ return static_cast<T>(a) == static_cast<T>(b); }
+template<typename T> bool operator!=(pcx::flags<T> a, pcx::flags<T> b){ return static_cast<T>(a) != static_cast<T>(b); }
+
+namespace std
+{
+
+template<typename T> struct hash<pcx::flags<T> >
+{
+    std::size_t operator()(const pcx::flags<T> &v) const { return std::hash<typename pcx::flags<T>::type>()(static_cast<typename pcx::flags<T>::type>(v)); }
+};
+
+}
+
 
 #endif // PCX_FLAGS_H
