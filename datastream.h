@@ -35,7 +35,7 @@ public:
     template<typename T> T get(){ T v = T(); (*this) >> v; return v; }
 
 private:
-    template<typename T> data_istream &pod(T &v){ s->read(reinterpret_cast<char*>(&v), sizeof(T)); return *this; }
+    template<typename T> data_istream &pod(T &v){ s->read(reinterpret_cast<char*>(&v), sizeof(T)); if(s->fail()) throw 0; return *this; }
 
     std::istream *s;
 };
@@ -43,7 +43,7 @@ private:
 class data_ifstream : public data_istream
 {
 public:
-    data_ifstream(const std::string &path) : data_istream(&i), i(path) { }
+    data_ifstream(const std::string &path) : data_istream(&i), i(path, std::ios::binary) { }
 
     bool is_open() const { return i.is_open(); }
 
@@ -89,7 +89,7 @@ private:
 class data_ofstream : public data_ostream
 {
 public:
-    data_ofstream(const std::string &path) : data_ostream(&o), o(path) { }
+    data_ofstream(const std::string &path) : data_ostream(&o), o(path, std::ios::binary) { }
 
     bool is_open() const { return o.is_open(); }
 
@@ -100,7 +100,7 @@ private:
 class data_osstream : public data_ostream
 {
 public:
-    data_osstream() : data_ostream(&o) { }
+    data_osstream() : data_ostream(&o), o(std::ios::binary) { }
 
     buffer data() const { auto s = o.str(); return buffer(s.begin(), s.end()); }
 
