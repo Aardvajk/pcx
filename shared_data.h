@@ -1,6 +1,8 @@
 #ifndef SHARED_DATA_H
 #define SHARED_DATA_H
 
+#include <utility>
+
 namespace pcx
 {
 
