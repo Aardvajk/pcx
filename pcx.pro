@@ -41,4 +41,5 @@ HEADERS += \
     datastream.h \
     fixed_array.h \
     buffer.h \
-    split_str.h
+    split_str.h \
+    scoped_counter.h
