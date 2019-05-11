@@ -30,10 +30,13 @@ public:
     template<typename T> T value() const { return type() == typeid(T) ? to<T>() : T(); }
 
     bool has_value() const { return static_cast<bool>(ops); }
+    operator bool() const { return has_value(); }
 
     const std::type_info &type() const { return ops ? ops->type() : typeid(void); }
 
 private:
+    operator int() const = delete;
+
     struct storage
     {
         union
