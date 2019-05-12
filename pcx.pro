@@ -42,4 +42,5 @@ HEADERS += \
     fixed_array.h \
     buffer.h \
     split_str.h \
-    scoped_counter.h
+    scoped_counter.h \
+    scoped_push.h
