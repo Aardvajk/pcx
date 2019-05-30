@@ -19,6 +19,7 @@ SOURCES += \
     split_str.cpp
 
 HEADERS += \
+    callback.h \
     flags.h \
     aligned_store.h \
     non_copyable.h \
