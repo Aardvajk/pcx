@@ -1,6 +1,8 @@
 #ifndef PCX_INDEXED_RANGE_H
 #define PCX_INDEXED_RANGE_H
 
+#include <cstring>
+
 namespace pcx
 {
 
