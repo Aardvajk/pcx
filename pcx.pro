@@ -16,7 +16,8 @@ SOURCES += \
     process.cpp \
     scoped_lock.cpp \
     datastream.cpp \
-    split_str.cpp
+    split_str.cpp \
+    textfile.cpp
 
 HEADERS += \
     callback.h \
@@ -44,4 +45,5 @@ HEADERS += \
     buffer.h \
     split_str.h \
     scoped_counter.h \
-    scoped_push.h
+    scoped_push.h \
+    textfile.h
