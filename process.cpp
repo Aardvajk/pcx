@@ -16,11 +16,11 @@ int pcx::process::execute(const std::string &command)
     std::vector<char> cmd(command.length() + 1);
     std::memcpy(cmd.data(), command.data(), cmd.size());
 
-    CreateProcess(NULL, cmd.data(), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
+    CreateProcess(nullptr, cmd.data(), nullptr, nullptr, FALSE, CREATE_NO_WINDOW, nullptr, nullptr, &si, &pi);
     WaitForSingleObject(pi.hProcess, INFINITE);
 
     DWORD code;
     GetExitCodeProcess(pi.hProcess, &code);
 
-    return code;
+    return static_cast<int>(code);
 }
