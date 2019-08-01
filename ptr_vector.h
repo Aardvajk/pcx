@@ -77,9 +77,11 @@ public:
     iterator erase(iterator i){ D()(*(i.i)); return iterator(v.erase(i.i)); }
     iterator erase(iterator a, iterator b){ for(auto i = a; i != b; ++i) D()(*(i.i)); return iterator(v.erase(a.i, b.i)); }
 
-    void insert_ptr(size_type index, T *t){ D()(v[index]); v[index] = t; }
+    void replace_ptr(size_type index, T *t){ D()(v[index]); v[index] = t; }
     void replace(T *before, T *after){ for(size_type i = 0; i < size(); ++i) if(ptr(i) == before){ insert_ptr(i, after); return; } }
     void replace_all(T *before, T *after){ for(size_type i = 0; i < size(); ++i) if(ptr(i) == before) insert_ptr(i, after); }
+
+    iterator insert(iterator pos, T *value){ return iterator(v.insert(pos.i, value)); }
 
     T &operator[](size_type i){ return *(v[i]); }
     const T &operator[](size_type i) const { return *(v[i]); }

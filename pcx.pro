@@ -24,6 +24,7 @@ HEADERS += \
     flags.h \
     aligned_store.h \
     non_copyable.h \
+    shared_ptr.h \
     str.h \
     any.h \
     lexical_cast.h \
