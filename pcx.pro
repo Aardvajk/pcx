@@ -12,6 +12,7 @@ QMAKE_LFLAGS += -Wl,--exclude-all-symbols
 INCLUDEPATH += "C:/Projects/pcx"
 
 SOURCES += \
+    args.cpp \
     optional.cpp \
     process.cpp \
     scoped_lock.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
     textfile.cpp
 
 HEADERS += \
+    args.h \
     callback.h \
     flags.h \
     aligned_store.h \
