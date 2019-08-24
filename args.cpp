@@ -2,6 +2,10 @@
 
 #include <iostream>
 
+pcx::args::args()
+{
+}
+
 pcx::args::args(int argc, char *argv[], std::vector<std::string> &args)
 {
     int i = 1;
@@ -17,7 +21,12 @@ pcx::args::args(int argc, char *argv[], std::vector<std::string> &args)
             s = s.substr(0, eq);
         }
 
-        m[s] = v;
+        if(m.find(s) != m.end())
+        {
+            m[s] += ";";
+        }
+
+        m[s] += v;
     }
 
     for(; i < argc; ++i)

@@ -11,6 +11,7 @@ namespace pcx
 class args
 {
 public:
+    args();
     args(int argc, char *argv[], std::vector<std::string> &args);
 
     bool contains(const std::string &name) const;

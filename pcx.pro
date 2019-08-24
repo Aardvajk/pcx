@@ -13,6 +13,7 @@ INCLUDEPATH += "C:/Projects/pcx"
 
 SOURCES += \
     args.cpp \
+    filesys.cpp \
     optional.cpp \
     process.cpp \
     scoped_lock.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 HEADERS += \
     args.h \
     callback.h \
+    filesys.h \
     flags.h \
     aligned_store.h \
     non_copyable.h \
