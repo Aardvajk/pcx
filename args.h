@@ -15,10 +15,10 @@ public:
     args(int argc, char *argv[], std::vector<std::string> &args);
 
     bool contains(const std::string &name) const;
-    std::string operator[](const std::string &name) const;
+    std::vector<std::string> operator[](const std::string &name) const;
 
 private:
-    std::unordered_map<std::string, std::string> m;
+    std::unordered_map<std::string, std::vector<std::string> > m;
 };
 
 }

@@ -21,12 +21,7 @@ pcx::args::args(int argc, char *argv[], std::vector<std::string> &args)
             s = s.substr(0, eq);
         }
 
-        if(m.find(s) != m.end())
-        {
-            m[s] += ";";
-        }
-
-        m[s] += v;
+        m[s].push_back(v);
     }
 
     for(; i < argc; ++i)
@@ -40,8 +35,8 @@ bool pcx::args::contains(const std::string &name) const
     return m.find(name) != m.end();
 }
 
-std::string pcx::args::operator[](const std::string &name) const
+std::vector<std::string> pcx::args::operator[](const std::string &name) const
 {
     auto i = m.find(name);
-    return i == m.end() ? std::string() : i->second;
+    return i == m.end() ? std::vector<std::string>() : i->second;
 }
