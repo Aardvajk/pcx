@@ -11,23 +11,28 @@ pcx::args::args(int argc, char *argv[], std::vector<std::string> &args)
     int i = 1;
     for(; i < argc && argv[i][0] == '-'; ++i)
     {
-        std::string s = std::string(argv[i]).substr(1);
-        std::string v;
-
-        auto eq = s.find_first_of('=');
-        if(eq != std::string::npos)
-        {
-            v = s.substr(eq + 1);
-            s = s.substr(0, eq);
-        }
-
-        m[s].push_back(v);
+        process(std::string(argv[i]).substr(1));
     }
 
     for(; i < argc; ++i)
     {
         args.push_back(argv[i]);
     }
+}
+
+void pcx::args::process(const std::string &option)
+{
+    std::string s = option;
+    std::string v;
+
+    auto eq = s.find_first_of('=');
+    if(eq != std::string::npos)
+    {
+        v = s.substr(eq + 1);
+        s = s.substr(0, eq);
+    }
+
+    m[s].push_back(v);
 }
 
 bool pcx::args::contains(const std::string &name) const
