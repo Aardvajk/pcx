@@ -19,6 +19,8 @@ public:
     bool contains(const std::string &name) const;
     std::vector<std::string> operator[](const std::string &name) const;
 
+    std::vector<std::string> keys() const;
+
 private:
     std::unordered_map<std::string, std::vector<std::string> > m;
 };

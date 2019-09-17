@@ -18,6 +18,8 @@ public:
     flags(T v) : v(static_cast<type>(v)) { }
     flags(std::initializer_list<T> vs) : v(0) { for(auto i: vs) v |= static_cast<type>(i); }
 
+    bool operator[](T value) const { return (*this) | value; }
+
     operator bool() const { return v; }
     operator T() const { return static_cast<T>(v); }
 
