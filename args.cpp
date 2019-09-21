@@ -32,7 +32,10 @@ void pcx::args::process(const std::string &option)
         v = s.substr(eq + 2);
         s = s.substr(0, eq);
 
-        m[s].push_back(v);
+        if(std::find(m[s].begin(), m[s].end(), v) == m[s].end())
+        {
+            m[s].push_back(v);
+        }
     }
     else
     {
