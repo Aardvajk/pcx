@@ -1,5 +1,7 @@
 #include "pcx/args.h"
 
+#include <pcx/textfile.h>
+
 #include <iostream>
 #include <algorithm>
 
@@ -70,6 +72,25 @@ void pcx::args::process(const std::string &option)
             }
         }
     }
+}
+
+bool pcx::args::readFromFile(const std::string &path)
+{
+    std::vector<std::string> v;
+    if(!pcx::textfile::read(path, v))
+    {
+        return false;
+    }
+
+    for(auto &s: v)
+    {
+        if(!s.empty())
+        {
+            process(s);
+        }
+    }
+
+    return true;
 }
 
 bool pcx::args::contains(const std::string &name) const

@@ -15,6 +15,7 @@ public:
     args(int argc, char *argv[], std::vector<std::string> &args);
 
     void process(const std::string &option);
+    bool readFromFile(const std::string &path);
 
     bool contains(const std::string &name) const;
     std::vector<std::string> operator[](const std::string &name) const;
