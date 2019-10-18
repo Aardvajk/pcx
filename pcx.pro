@@ -13,6 +13,7 @@ INCLUDEPATH += "C:/Projects/pcx"
 
 SOURCES += \
     args.cpp \
+    base64.cpp \
     filesys.cpp \
     optional.cpp \
     process.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 
 HEADERS += \
     args.h \
+    base64.h \
     callback.h \
     filesys.h \
     flags.h \
