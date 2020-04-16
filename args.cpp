@@ -7,10 +7,17 @@
 
 pcx::args::args()
 {
+    mv.push_back({ });
+}
+
+pcx::args::~args()
+{
 }
 
 pcx::args::args(int argc, char *argv[], std::vector<std::string> &args)
 {
+    mv.push_back({ });
+
     int i = 1;
     for(; i < argc && argv[i][0] == '-'; ++i)
     {
@@ -23,8 +30,20 @@ pcx::args::args(int argc, char *argv[], std::vector<std::string> &args)
     }
 }
 
+void pcx::args::push()
+{
+    mv.push_back(mv.back());
+}
+
+void pcx::args::pop()
+{
+    mv.pop_back();
+}
+
 void pcx::args::process(const std::string &option)
 {
+    auto &m = mv.back();
+
     std::string s = option;
     std::string v;
 
@@ -95,17 +114,22 @@ bool pcx::args::readFromFile(const std::string &path)
 
 bool pcx::args::contains(const std::string &name) const
 {
+    auto &m = mv.back();
     return m.find(name) != m.end();
 }
 
 std::vector<std::string> pcx::args::operator[](const std::string &name) const
 {
+    auto &m = mv.back();
+
     auto i = m.find(name);
     return i == m.end() ? std::vector<std::string>() : i->second;
 }
 
 std::vector<std::string> pcx::args::keys() const
 {
+    auto &m = mv.back();
+
     std::vector<std::string> v;
     for(auto &s: m)
     {

@@ -78,8 +78,8 @@ public:
     iterator erase(iterator a, iterator b){ for(auto i = a; i != b; ++i) D()(*(i.i)); return iterator(v.erase(a.i, b.i)); }
 
     void replace_ptr(size_type index, T *t){ D()(v[index]); v[index] = t; }
-    void replace(T *before, T *after){ for(size_type i = 0; i < size(); ++i) if(ptr(i) == before){ insert_ptr(i, after); return; } }
-    void replace_all(T *before, T *after){ for(size_type i = 0; i < size(); ++i) if(ptr(i) == before) insert_ptr(i, after); }
+    void replace(T *before, T *after){ for(size_type i = 0; i < size(); ++i) if(ptr(i) == before){ replace_ptr(i, after); return; } }
+    void replace_all(T *before, T *after){ for(size_type i = 0; i < size(); ++i) if(ptr(i) == before) replace_ptr(i, after); }
 
     iterator insert(iterator pos, T *value){ return iterator(v.insert(pos.i, value)); }
 

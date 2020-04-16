@@ -97,7 +97,7 @@ template<typename Base> template<typename T> resource_handle<Base, T> resource_m
         auto id = fr.back();
         fr.pop_back();
 
-        v.insert_ptr(id, p);
+        v.replace_ptr(id, p);
         return resource_handle<Base, T>(this, id);
     }
 
@@ -110,7 +110,7 @@ template<typename Base> template<typename T> void resource_map<Base>::remove(con
     auto i = *(id.id);
 
     delete v.ptr(i);
-    v.insert_ptr(i, nullptr);
+    v.replace_ptr(i, nullptr);
 
     fr.push_back(i);
 }

@@ -13,6 +13,10 @@ class args
 public:
     args();
     args(int argc, char *argv[], std::vector<std::string> &args);
+    ~args();
+
+    void push();
+    void pop();
 
     void process(const std::string &option);
     bool readFromFile(const std::string &path);
@@ -23,7 +27,7 @@ public:
     std::vector<std::string> keys() const;
 
 private:
-    std::unordered_map<std::string, std::vector<std::string> > m;
+    std::vector<std::unordered_map<std::string, std::vector<std::string> > > mv;
 };
 
 }
