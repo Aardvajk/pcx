@@ -29,6 +29,7 @@ HEADERS += \
     filesys.h \
     flags.h \
     aligned_store.h \
+    indexed_set.h \
     non_copyable.h \
     shared_ptr.h \
     str.h \
