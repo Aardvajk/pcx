@@ -65,15 +65,14 @@ class data_ostream;
 class data_ostream_patch_base
 {
 public:
-    explicit data_ostream_patch_base(std::size_t n) : s(nullptr), n(n) { }
+    explicit data_ostream_patch_base(std::size_t n) : n(n) { }
 
 protected:
-    void update(const char *v);
+    void update(data_ostream &s, const char *v);
 
 private:
     friend class data_ostream;
 
-    data_ostream *s;
     std::size_t n, p;
 };
 
@@ -82,7 +81,7 @@ template<typename T> class data_ostream_patch : public data_ostream_patch_base
 public:
     data_ostream_patch() : data_ostream_patch_base(sizeof(T)) { }
 
-    void assign(const T &v){ update(reinterpret_cast<const char*>(&v)); }
+    void assign(data_ostream &s, const T &v){ update(s, reinterpret_cast<const char*>(&v)); }
 };
 
 class data_ostream

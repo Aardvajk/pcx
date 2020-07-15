@@ -11,12 +11,9 @@ pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s)
     return ds;
 }
 
-void pcx::data_ostream_patch_base::update(const char *v)
+void pcx::data_ostream_patch_base::update(data_ostream &s, const char *v)
 {
-    if(s)
-    {
-        s->writeAt(p, v, n);
-    }
+    s.writeAt(p, v, n);
 }
 
 pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::string &s)
@@ -34,7 +31,6 @@ pcx::data_ostream &operator<<(pcx::data_ostream &ds, const char *s)
 
 pcx::data_ostream &pcx::data_ostream::operator<<(data_ostream_patch_base &v)
 {
-    v.s = this;
     v.p = position();
 
     for(std::size_t i = 0; i < v.n; ++i)
