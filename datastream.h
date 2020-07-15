@@ -60,6 +60,31 @@ private:
     std::istringstream i;
 };
 
+class data_ostream;
+
+class data_ostream_patch_base
+{
+public:
+    explicit data_ostream_patch_base(std::size_t n) : s(nullptr), n(n) { }
+
+protected:
+    void update(const char *v);
+
+private:
+    friend class data_ostream;
+
+    data_ostream *s;
+    std::size_t n, p;
+};
+
+template<typename T> class data_ostream_patch : public data_ostream_patch_base
+{
+public:
+    data_ostream_patch() : data_ostream_patch_base(sizeof(T)) { }
+
+    void assign(const T &v){ update(reinterpret_cast<const char*>(&v)); }
+};
+
 class data_ostream
 {
 public:
@@ -78,7 +103,12 @@ public:
     data_ostream &operator<<(float v){ return pod(v); }
     data_ostream &operator<<(double v){ return pod(v); }
 
+    data_ostream &operator<<(data_ostream_patch_base &v);
+
     void write(const char *ch, std::size_t bytes){ s->write(ch, bytes); }
+    void writeAt(std::size_t position, const char *ch, std::size_t bytes);
+
+    std::size_t position() const { return std::size_t(s->tellp()); }
 
 private:
     template<typename T> data_ostream &pod(const T &v){ s->write(reinterpret_cast<const char*>(&v), sizeof(T)); return *this; }
