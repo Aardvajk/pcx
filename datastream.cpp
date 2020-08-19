@@ -1,14 +1,8 @@
 #include "pcx/datastream.h"
 
-pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s)
+std::vector<char> pcx::data_istream::all()
 {
-    std::vector<char> v;
-
-    ds >> v;
-    v.push_back('\0');
-    s = v.data();
-
-    return ds;
+    return { std::istreambuf_iterator<char>(*s), std::istreambuf_iterator<char>() };
 }
 
 void pcx::data_ostream_patch_base::update(data_ostream &s, const char *v)

@@ -11,6 +11,7 @@ namespace pcx
 template<typename T, typename D> class basic_ptr_vector
 {
 public:
+    using value_type = T;
     using size_type = typename std::vector<T*>::size_type;
 
     class iterator

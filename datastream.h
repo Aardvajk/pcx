@@ -34,6 +34,8 @@ public:
 
     template<typename T> T get(){ T v = T(); (*this) >> v; return v; }
 
+    std::vector<char> all();
+
 private:
     template<typename T> data_istream &pod(T &v){ s->read(reinterpret_cast<char*>(&v), sizeof(T)); if(s->fail()) throw 0; return *this; }
 
@@ -51,10 +53,10 @@ private:
     std::ifstream i;
 };
 
-class data_isstream : public data_istream
+class data_istringstream : public data_istream
 {
 public:
-    data_isstream(const buffer &data) : data_istream(&i), i(std::string(data.begin(), data.end()), std::ios::binary) { }
+    data_istringstream(const buffer &data) : data_istream(&i), i(std::string(data.begin(), data.end()), std::ios::binary) { }
 
 private:
     std::istringstream i;
@@ -66,6 +68,8 @@ class data_ostream_patch_base
 {
 public:
     explicit data_ostream_patch_base(std::size_t n) : n(n) { }
+
+    std::size_t position() const { return p; }
 
 protected:
     void update(data_ostream &s, const char *v);
@@ -126,10 +130,10 @@ private:
     std::ofstream o;
 };
 
-class data_osstream : public data_ostream
+class data_ostringstream : public data_ostream
 {
 public:
-    data_osstream() : data_ostream(&o), o(std::ios::binary) { }
+    data_ostringstream() : data_ostream(&o), o(std::ios::binary) { }
 
     buffer data() const { auto s = o.str(); return buffer(s.begin(), s.end()); }
 
@@ -175,9 +179,18 @@ template<> inline pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std
     return ds;
 }
 
-pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s);
-pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::string &s);
+inline pcx::data_istream &operator>>(pcx::data_istream &ds, std::string &s)
+{
+    std::vector<char> v;
 
+    ds >> v;
+    v.push_back('\0');
+    s = v.data();
+
+    return ds;
+}
+
+pcx::data_ostream &operator<<(pcx::data_ostream &ds, const std::string &s);
 pcx::data_ostream &operator<<(pcx::data_ostream &ds, const char *s);
 
 #endif // DATASTREAM_H
