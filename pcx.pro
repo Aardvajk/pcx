@@ -15,6 +15,7 @@ SOURCES += \
     args.cpp \
     base64.cpp \
     filesys.cpp \
+    format.cpp \
     optional.cpp \
     process.cpp \
     scoped_lock.cpp \

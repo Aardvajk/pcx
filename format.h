@@ -9,7 +9,19 @@ namespace pcx
 namespace format
 {
 
-inline std::size_t padw(std::size_t n) { return n ? pcx::str(n - 1).length() : 1; }
+namespace detail
+{
+
+std::string banner_imp(std::string title, char ch);
+
+}
+
+template<typename... Args> std::string banner(Args&&... args)
+{
+    return detail::banner_imp(pcx::str(std::forward<Args>(args)...), '=');
+}
+
+std::size_t padw(std::size_t n);
 
 template<typename T> std::string pad(const T &text, std::size_t width)
 {
