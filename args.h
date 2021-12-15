@@ -22,6 +22,8 @@ public:
     bool readFromFile(const std::string &path);
 
     bool contains(const std::string &name) const;
+    bool contains(const std::string &name, const std::string &value) const;
+
     std::vector<std::string> operator[](const std::string &name) const;
 
     std::vector<std::string> keys() const;

@@ -126,6 +126,21 @@ std::vector<std::string> pcx::args::operator[](const std::string &name) const
     return i == m.end() ? std::vector<std::string>() : i->second;
 }
 
+bool pcx::args::contains(const std::string &name, const std::string &value) const
+{
+    if(contains(name))
+    {
+        auto v = (*this)[name];
+
+        if(std::find(v.begin(), v.end(), value) != v.end())
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 std::vector<std::string> pcx::args::keys() const
 {
     auto &m = mv.back();
