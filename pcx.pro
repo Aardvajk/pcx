@@ -5,9 +5,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 DEFINES -= UNICODE
+INCLUDEPATH += C:/wclang/include
 
-QMAKE_CXXFLAGS += -std=gnu++11
-QMAKE_LFLAGS += -Wl,--exclude-all-symbols
+LIBS += -L"C:/wclang/lib"
 
 INCLUDEPATH += "C:/Projects/pcx"
 
