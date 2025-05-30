@@ -1,4 +1,4 @@
-#ifndef PCX_ANY_H
+﻿#ifndef PCX_ANY_H
 #define PCX_ANY_H
 
 #include <type_traits>
@@ -13,14 +13,14 @@ namespace pcx
 class any
 {
 public:
-    any() : ops(nullptr) { }
+    any() = default;
     template<typename T> any(const T &v){ construct(v); }
     any(const any &v) : ops(v.ops) { if(ops) ops->copy(v.store, store); }
-    any(any &&v) : ops(v.ops) { if(ops) ops->move(v.store, store); }
+    any(any &&v) noexcept : ops(v.ops) { if(ops) ops->move(v.store, store); }
     ~any(){ if(ops) ops->destroy(store); }
 
     any &operator=(const any &v){ any(v).swap(*this); return *this; }
-    any &operator=(any &&v){ any(std::move(v)).swap(*this); return *this; }
+    any &operator=(any &&v) noexcept { any(std::move(v)).swap(*this); return *this; }
 
     template<typename T> any &operator=(const T &v){ any(v).swap(*this); return *this; }
 
@@ -34,9 +34,9 @@ public:
 
     const std::type_info &type() const { return ops ? ops->type() : typeid(void); }
 
-private:
     operator int() const = delete;
 
+private:
     struct storage
     {
         union
@@ -102,7 +102,7 @@ private:
     }
 
     storage store;
-    operations *ops;
+    operations *ops = nullptr;
 };
 
 }

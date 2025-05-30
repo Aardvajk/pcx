@@ -1,4 +1,4 @@
-#ifndef SHARED_DATA_H
+﻿#ifndef SHARED_DATA_H
 #define SHARED_DATA_H
 
 #include <utility>
@@ -22,11 +22,11 @@ private:
 public:
     template<typename... Args> shared_data(Args&&... args) : r(new rep(std::forward<Args>(args)...)) { }
     shared_data(const shared_data &s) : r(s.r) { ++r->n; }
-    shared_data(shared_data &&s) : r(s.r) { s.r = nullptr; }
+    shared_data(shared_data &&s) noexcept : r(s.r) { s.r = nullptr; }
     ~shared_data(){ if(r && !--r->n) delete r; }
 
     shared_data &operator=(const shared_data &s){ if(this != &s){ if(!--r->n) delete r; r = s.r; ++r->n; } return *this; }
-    shared_data &operator=(shared_data &&s){ if(this != &s){ if(!--r->n) delete r; r = s.r; s.r = nullptr; } return *this; }
+    shared_data &operator=(shared_data &&s) noexcept { if(this != &s){ if(!--r->n) delete r; r = s.r; s.r = nullptr; } return *this; }
 
     T &value(){ detach(); return r->v; }
     const T &value() const { return r->v; }

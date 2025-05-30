@@ -1,4 +1,4 @@
-#include "pcx/args.h"
+﻿#include "pcx/args.h"
 
 #include <pcx/textfile.h>
 
@@ -10,9 +10,7 @@ pcx::args::args()
     mv.push_back({ });
 }
 
-pcx::args::~args()
-{
-}
+pcx::args::~args() = default;
 
 pcx::args::args(int argc, char *argv[], std::vector<std::string> &args)
 {
